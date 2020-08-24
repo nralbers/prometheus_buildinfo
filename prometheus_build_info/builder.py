@@ -13,6 +13,6 @@ def make_build_info(appname, branch, revision, version):
         "revision": revision,
         "version": version
     }
-    with open('buildinfo.json', 'w') as buildinfo_file:
+    with open('build_info.json', 'w') as buildinfo_file:
         buildinfo_file.write(json.dumps(buildinfo, indent=4, sort_keys=True))
     click.echo("BuildInfo updated")

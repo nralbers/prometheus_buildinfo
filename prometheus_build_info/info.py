@@ -1,11 +1,23 @@
 from prometheus_client import Gauge
 from json import load
+import os
+import sys
+import logging
 
-with open("build_info.json", "r") as buildinfo:
-    info = load(buildinfo)
+logger = logging.getLogger(__name__)
 
-metric = info['appname'] + "_build_info"
-build_info = Gauge(metric, 'Build Information',
-                   ['branch', 'goversion', 'revision', 'version'])
+try:
+    with open(os.getcwd() + "/build_info.json", "r") as buildinfo:
+        info = load(buildinfo)
 
-build_info.labels(info['branch'], 'none', info['revision'], info['version']).set(1)
+    metric = info['appname'] + "_build_info"
+    build_info = Gauge(metric, 'Build Information',
+                       ['branch', 'pythonversion', 'revision', 'version'], multiprocess_mode='liveall')
+
+    # Extract runtime python version
+    python_version_info = sys.version_info
+    python_version = "{}.{}.{}".format(python_version_info.major, python_version_info.minor, python_version_info.micro)
+
+    build_info.labels(info['branch'], python_version, info['revision'], info['version']).set(1)
+except OSError as err:
+    logger.exception("No build_info.json file, no metric added")
