@@ -6,8 +6,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='python_prometheus_build_info',
-    version='0.0.1',
+    name='prometheus_build_info',
+    version='1.0.1',
     packages=find_packages(),
     include_package_data=True,
     url='',
@@ -35,7 +35,7 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: System :: Monitoring",
         "Topic :: Software Development :: Build Tools",

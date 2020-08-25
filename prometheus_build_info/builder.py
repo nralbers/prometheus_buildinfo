@@ -2,10 +2,10 @@ import click
 import json
 
 @click.command()
-@click.argument('appname')
-@click.argument('branch')
-@click.argument('revision')
-@click.argument('version')
+@click.argument('appname', envvar='APPNAME')
+@click.argument('branch', envvar='BRANCH')
+@click.argument('revision', envvar='REVISION')
+@click.argument('version', envvar='VERSION')
 def make_build_info(appname, branch, revision, version):
     buildinfo= {
         "appname": appname,
