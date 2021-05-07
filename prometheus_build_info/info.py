@@ -12,7 +12,7 @@ try:
 
     metric = info['appname'] + "_build_info"
     build_info = Gauge(metric, 'Build Information',
-                       ['branch', 'pythonversion', 'revision', 'version'], multiprocess_mode='liveall')
+                       ['branch', 'pythonversion', 'revision', 'version'], multiprocess_mode='max')
 
     # Extract runtime python version
     python_version_info = sys.version_info
