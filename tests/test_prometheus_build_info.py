@@ -82,9 +82,9 @@ class BuildBuilderTestCase(unittest.TestCase):
     def test_builder(self):
         runner = CliRunner()
         runner.invoke(builder.make_build_info, ["test_app", "master", "abcdef", "1.0.0"])
-        self.assertEqual(os.path.exists("build_info.json"), True)
+        self.assertEqual(os.path.exists(PROM_BUILD_FILE), True)
 
-        with open(os.getcwd() + "/build_info.json", "r") as buildinfo:
+        with open(os.getcwd() + "/" + PROM_BUILD_FILE, "r") as buildinfo:
             info = load(buildinfo)
 
         self.assertEqual(info['appname'], "test_app")
