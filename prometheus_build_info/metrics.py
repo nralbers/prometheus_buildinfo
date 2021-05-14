@@ -3,7 +3,7 @@ from json import load
 import os
 import sys
 import logging
-from builder import PROM_BUILD_FILE
+from .builder import PROM_BUILD_FILE
 
 logger = logging.getLogger(__name__)
 

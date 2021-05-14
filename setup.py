@@ -7,10 +7,10 @@ with open("README.md", "r") as fh:
 
 setup(
     name='prometheus_build_info',
-    version='2.0.0',
+    version='2.0.1',
     packages=find_packages(),
     include_package_data=True,
-    url='',
+    url='https://github.com/nralbers/prometheus_buildinfo',
     license='MIT',
     author='Niels Albers',
     author_email='nralbers@gmail.com',
@@ -23,7 +23,7 @@ setup(
     keywords=KEYWORDS,
     long_description=long_description,
     long_description_content_type="text/markdown; charset=UTF-8",
-    python_requires='~=3.5',
+    python_requires='>=3.5',
     classifiers=[
         "Natural Language :: English",
         "Programming Language :: Python :: 3",

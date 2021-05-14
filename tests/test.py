@@ -1,5 +1,6 @@
 import unittest
 from prometheus_build_info import builder
+from prometheus_build_info.builder import PROM_BUILD_FILE
 from prometheus_client import REGISTRY
 from click.testing import CliRunner
 import sys
@@ -10,7 +11,7 @@ from json import load
 class BuildInfoTestCase(unittest.TestCase):
     def tearDown(self):
         try:
-            os.remove("build_info.json")
+            os.remove(PROM_BUILD_FILE)
         except OSError as err:
             print("Nothing to cleanup")
 
@@ -37,7 +38,7 @@ class BuildInfoTestCase(unittest.TestCase):
 
         # Test
         before = REGISTRY.get_sample_value("test_app_build_info", labels)
-        from prometheus_build_info import info
+        from prometheus_build_info import metrics
         after = REGISTRY.get_sample_value("test_app_build_info", labels)
         self.assertEqual(before, None)
         self.assertEqual(after, 1.0)
@@ -45,12 +46,12 @@ class BuildInfoTestCase(unittest.TestCase):
         print("after: {}".format(after))
 
         # Cleanup
-        os.remove("build_info.json")
+        os.remove(PROM_BUILD_FILE)
 
     def test_no_buildinfo(self):
         print("test_no_buildinfo")
         try:
-            os.remove("build_info.json")
+            os.remove(PROM_BUILD_FILE)
         except OSError as err:
             print("Nothing to cleanup")
 
@@ -70,7 +71,7 @@ class BuildInfoTestCase(unittest.TestCase):
                   "version": "1.0.0"}
         before = REGISTRY.get_sample_value("test_app_build_info", labels)
         print("before: {}".format(before))
-        from prometheus_build_info import info
+        from prometheus_build_info import metrics
         after = REGISTRY.get_sample_value("test_app_build_info", labels)
         print("after: {}".format(after))
         self.assertEqual(before, None)
@@ -92,7 +93,7 @@ class BuildBuilderTestCase(unittest.TestCase):
         self.assertEqual(info['version'], "1.0.0")
 
     def tearDown(self):
-        os.remove("build_info.json")
+        os.remove(PROM_BUILD_FILE)
 
 
 if __name__ == '__main__':
