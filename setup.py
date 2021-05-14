@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='prometheus_build_info',
-    version='2.0.1',
+    version='2.0.2',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/nralbers/prometheus_buildinfo',
