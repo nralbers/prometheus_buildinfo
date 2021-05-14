@@ -1,6 +1,8 @@
 import click
 import json
 
+PROM_BUILD_FILE= "prom_build_info.json"
+
 @click.command()
 @click.argument('appname', envvar='APPNAME')
 @click.argument('branch', envvar='BRANCH')
@@ -13,6 +15,6 @@ def make_build_info(appname, branch, revision, version):
         "revision": revision,
         "version": version
     }
-    with open('build_info.json', 'w') as buildinfo_file:
+    with open(PROM_BUILD_FILE, 'w') as buildinfo_file:
         buildinfo_file.write(json.dumps(buildinfo, indent=4, sort_keys=True))
     click.echo("BuildInfo updated")

@@ -3,11 +3,12 @@ from json import load
 import os
 import sys
 import logging
+from builder import PROM_BUILD_FILE
 
 logger = logging.getLogger(__name__)
 
 try:
-    with open(os.getcwd() + "/build_info.json", "r") as buildinfo:
+    with open(os.getcwd() + "/" + PROM_BUILD_FILE, "r") as buildinfo:
         info = load(buildinfo)
 
     metric = info['appname'] + "_build_info"
@@ -20,4 +21,4 @@ try:
 
     build_info.labels(info['branch'], python_version, info['revision'], info['version']).set(1)
 except OSError as err:
-    logger.exception("No build_info.json file, no metric added")
+    logger.exception("No " + PROM_BUILD_FILE + " file, no metric added")
